@@ -1,0 +1,349 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "Snake-Retro";
+  src: url("../assets/fuentes/PressStart2P-Regular.woff2") format("woff2"),
+    url("../assets/fuentes/PressStart2P-Regular.woff") format("woff");
+}
+
+body {
+  font-family: "Snake-Retro", system-ui, -apple-system;
+  background-color: var(--dark-bg);
+  color: var(--text-primary);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* =====  CONTENEDOR ===== */
+.game-container {
+  width: 100%;
+  max-width: 900px;
+  position: relative;
+  z-index: 1;
+}
+
+.background-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+      circle at center,
+      var(--primary-green) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      circle at top left,
+      var(--secondary-blue) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      var(--accent-purple) 0%,
+      transparent 50%
+    );
+  background-size: 200% 200%;
+  animation: backgroundPan 20s linear infinite alternate;
+  opacity: 0.05;
+  z-index: -2;
+}
+
+.grid-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+      var(--primary-green) 0.2px,
+      transparent 0.2px
+    ),
+    linear-gradient(90deg, var(--primary-green) 0.2px, transparent 0.2px);
+  background-size: 40px 40px;
+  opacity: 0.1;
+  z-index: -1;
+}
+
+@keyframes backgroundPan {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+
+.mode-selector {
+  width: 100%;
+}
+
+
+.mode-header {
+  margin-bottom: 30px;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.back-button {
+  background: none;
+  border: 2px solid var(--primary-green);
+  color: var(--primary-green);
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-button:hover {
+  background-color: rgba(0, 255, 0, 0.1);
+  transform: translateX(-5px);
+  box-shadow: 0 0 10px var(--glow-green);
+}
+
+.mode-title {
+  font-size: 2.2rem;
+  color: var(--primary-green);
+  text-shadow: 0 0 15px var(--glow-green);
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+.play-button {
+  background: none;
+  border: 2px solid var(--primary-green);
+  color: var(--primary-green);
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  box-shadow: 0 0 10px var(--glow-green);
+  text-decoration: none;
+}
+
+.play-button:hover {
+  background-color: rgba(0, 255, 0, 0.2);
+  box-shadow: 0 0 15px var(--glow-green);
+  transform: scale(1.05);
+}
+
+.play-icon {
+  filter: drop-shadow(0 0 3px var(--primary-green));
+}
+
+
+.game-modes {
+  width: 100%;
+}
+
+.modes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+  margin-bottom: 25px;
+}
+
+
+.mode-card {
+  background-color: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  gap: 16px;
+  position: relative;
+}
+
+.mode-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary-green);
+  box-shadow: 0 0 20px var(--glow-green);
+}
+
+.mode-card.selected {
+  border-color: var(--primary-green);
+  background-color: rgba(0, 255, 0, 0.1);
+  box-shadow: 0 0 25px var(--glow-green);
+}
+
+.mode-icon {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  background-color: rgba(0, 255, 0, 0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  font-size: 28px;
+}
+
+.mode-content {
+  flex: 1;
+}
+
+.mode-header-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.mode-name {
+  font-size: 1rem;
+  color: var(--primary-green);
+  font-weight: bold;
+  text-shadow: 0 0 5px var(--glow-green);
+}
+
+.selection-indicator {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--primary-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.3s ease;
+}
+
+.mode-card.selected .selection-indicator {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.selection-indicator::after {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--dark-bg);
+}
+
+.mode-description {
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.time-limit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  color: var(--accent-purple);
+  font-family: "Courier New", monospace;
+  font-size: 0.9rem;
+}
+
+.mode-rules {
+  margin-top: 12px;
+}
+
+.rules-title {
+  font-size: 0.8rem;
+  color: var(--secondary-blue);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.rules-list {
+  list-style: none;
+}
+
+.rule-item {
+  font-size: 0.6rem;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+  padding-left: 12px;
+  position: relative;
+}
+
+.rule-item::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--primary-green);
+}
+
+
+.selection-display {
+  background-color: var(--card-bg);
+  border: 2px solid var(--primary-green);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+}
+
+.selection-text {
+  font-family: "Courier New", monospace;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+.selected-mode-name {
+  color: var(--primary-green);
+  font-weight: bold;
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 768px) {
+  .modes-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .mode-title {
+    font-size: 2rem;
+  }
+
+  .header-content {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .mode-card {
+    padding: 16px;
+  }
+
+  .mode-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .icon {
+    font-size: 24px;
+  }
+}

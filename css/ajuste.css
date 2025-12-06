@@ -1,0 +1,426 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "Snake-Retro";
+  src: url("../assets/fuentes/PressStart2P-Regular.woff2") format("woff2"),
+    url("../assets/fuentes/PressStart2P-Regular.woff") format("woff");
+}
+
+body {
+  font-family: "Snake-Retro", system-ui, -apple-system;
+  background-color: var(--dark-bg);
+  color: var(--text-primary);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* ===== CONTENEDOR  ===== */
+.game-container {
+  width: 100%;
+  max-width: 900px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== FONDO ANIMADO ===== */
+.background-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+      circle at center,
+      var(--primary-green) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      circle at top left,
+      var(--secondary-blue) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      var(--accent-purple) 0%,
+      transparent 50%
+    );
+  background-size: 200% 200%;
+  animation: backgroundPan 20s linear infinite alternate;
+  opacity: 0.05;
+  z-index: -2;
+}
+
+.grid-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+      var(--primary-green) 0.2px,
+      transparent 0.2px
+    ),
+    linear-gradient(90deg, var(--primary-green) 0.2px, transparent 0.2px);
+  background-size: 40px 40px;
+  opacity: 0.1;
+  z-index: -1;
+}
+
+@keyframes backgroundPan {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+/* ===== CONTENEDOR DE CONFIGURACIONES ===== */
+.settings-container {
+  width: 100%;
+}
+
+/* ===== HEADER ===== */
+.settings-header {
+  margin-bottom: 30px;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.back-button,
+.save-button {
+  background: none;
+  border: 2px solid var(--primary-green);
+  color: var(--primary-green);
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-button:hover,
+.save-button:hover {
+  background-color: rgba(0, 255, 0, 0.1);
+  transform: scale(1.05);
+  box-shadow: 0 0 10px var(--glow-green);
+}
+
+.save-button {
+  padding: 10px 16px;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.settings-title {
+  font-size: 2.2rem;
+  color: var(--primary-green);
+  text-shadow: 0 0 15px var(--glow-green);
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+.save-icon {
+  filter: drop-shadow(0 0 3px var(--primary-green));
+}
+
+
+.settings-content {
+  width: 100%;
+}
+
+
+.settings-section {
+  background-color: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.settings-section:hover {
+  border-color: var(--primary-green);
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+}
+
+.section-title {
+  font-size: 1.2rem;
+  color: var(--primary-green);
+  margin-bottom: 20px;
+  text-shadow: 0 0 5px var(--glow-green);
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.setting-description {
+  flex: 1;
+}
+
+.setting-name {
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: 5px;
+}
+
+.setting-info {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.setting-control {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  max-width: 50%;
+}
+
+
+.board-size-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.radio-option:hover {
+  transform: translateX(5px);
+}
+
+.radio-option input[type="radio"] {
+  display: none;
+}
+
+.radio-custom {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--primary-green);
+  border-radius: 50%;
+  margin-right: 10px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.radio-option input[type="radio"]:checked + .radio-custom {
+  background-color: var(--primary-green);
+  box-shadow: 0 0 10px var(--glow-green);
+}
+
+.radio-option input[type="radio"]:checked + .radio-custom::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--dark-bg);
+}
+
+.radio-label {
+  color: var(--text-primary);
+  font-size: 0.7rem;
+}
+
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--border-color);
+  transition: 0.4s;
+  border-radius: 30px;
+  border: 2px solid var(--border-color);
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+  background-color: rgba(0, 255, 0, 0.2);
+  border-color: var(--primary-green);
+  box-shadow: 0 0 10px var(--glow-green);
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(30px);
+}
+
+
+.select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.custom-select {
+  width: 100%;
+  padding: 10px 15px;
+  background-color: var(--card-bg);
+  border: 2px solid var(--primary-green);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  cursor: pointer;
+  appearance: none;
+  transition: all 0.3s ease;
+}
+
+.custom-select:hover {
+  background-color: rgba(0, 255, 0, 0.1);
+  box-shadow: 0 0 10px var(--glow-green);
+}
+
+.select-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid var(--primary-green);
+  pointer-events: none;
+}
+
+
+.food-shape-options {
+  display: flex;
+  gap: 15px;
+}
+
+.shape-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.shape-option:hover {
+  transform: translateY(-5px);
+}
+
+.shape-option input[type="radio"] {
+  display: none;
+}
+
+.shape-option input[type="radio"]:checked + .shape-preview {
+  transform: scale(1.1);
+}
+
+.shape-label {
+  color: var(--text-primary);
+  font-size: 0.7rem;
+  text-align: center;
+}
+
+
+.reset-button {
+  background: none;
+  border: 2px solid var(--danger-red);
+  color: var(--danger-red);
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  font-weight: bold;
+}
+
+.reset-button:hover {
+  background-color: rgba(255, 0, 0, 0.1);
+  transform: scale(1.05);
+  box-shadow: 0 0 10px var(--danger-red);
+}
+
+/* ===== DISEÑO RESPONSIVO ===== */
+@media (max-width: 768px) {
+  .settings-title {
+    font-size: 2rem;
+  }
+
+  .header-content {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .setting-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .setting-control {
+    width: 100%;
+    max-width: 100%;
+    justify-content: flex-start;
+  }
+
+  .food-shape-options {
+    flex-wrap: wrap;
+  }
+
+  .board-size-options {
+    width: 100%;
+  }
+}

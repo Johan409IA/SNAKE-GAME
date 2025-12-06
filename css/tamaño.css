@@ -1,0 +1,175 @@
+/* ===== ESTILOS PARA DIFERENTES TAMAÑOS DE TABLERO ===== */
+
+
+
+/* ===== TABLERO PEQUEÑO (15x15) ===== */
+/* Celdas más grandes, ideal para principiantes */
+.game-board.board-small {
+  height: 491px;
+  width: 554px;
+}
+
+.game-board.board-small .grid-lines {
+  background-size: 30px 30px;
+  background-repeat: repeat;
+}
+
+.game-board.board-small .snake-head {
+  width: 30px !important;
+  height: 30px !important;
+  left: 50%;
+  top: 50%;
+  
+}
+
+.game-board.board-small .food {
+  width: 26px !important;
+  right: 18%;
+  top: 28%;
+}
+
+/* ===== TABLERO MEDIANO (20x20) ===== */
+
+.game-board.board-medium {
+  height: 490px;
+  width: 745px;
+}
+
+.game-board.board-medium .grid-lines {
+  background-size: 25px 25px;
+}
+
+.game-board.board-medium .food {
+  top: 26%;
+  right: 31%;
+  width: 20px;
+}
+
+/* ===== TABLERO GRANDE (25x25) ===== */
+
+.game-board.board-large {
+  height: 556px;
+  width: 556px;
+}
+
+.game-board.board-large .grid-lines {
+  background-size: 22px 22px;
+}
+
+.game-board.board-large .snake-head {
+  width: 22px;
+  height: 22px;
+  top: 48%;
+}
+
+.game-board.board-large .food {
+  right: 19%;
+  top: 12%;
+  width: 20px !important;
+}
+
+/* ===== ESTILOS PARA EL ELEMENTO DE COMIDA ===== */
+
+
+.food img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* ===== LÍNEAS DE CUADRÍCULA ===== */
+.grid-lines {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+      to right,
+      var(--color-primary-soft) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, var(--color-primary-soft) 1px, transparent 1px);
+  pointer-events: none;
+  z-index: 1;
+  transition: background-size 0.3s ease;
+}
+
+/* ===== ÁREA DE JUEGO ===== */
+.snake-game-area {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--color-background);
+}
+
+/* ===== CABEZA DE LA SERPIENTE ===== */
+.snake-head {
+  position: absolute;
+  background: var(--color-accent);
+  border: 2px solid var(--color-primary);
+  border-radius: 4px;
+  box-shadow: 0 0 10px var(--color-accent);
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+/* ===== RESPONSIVE: AJUSTES PARA PANTALLAS PEQUEÑAS ===== */
+@media (max-width: 900px) {
+  .game-board {
+    height: 400px;
+  }
+
+  .game-board.board-small {
+    height: 350px;
+  }
+
+  .game-board.board-medium {
+    height: 400px;
+  }
+
+  .game-board.board-large {
+    height: 450px;
+  }
+
+  .snake-head,
+  .food {
+    width: 18px !important;
+    height: 18px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .game-board {
+    height: 300px;
+  }
+
+  .game-board.board-small,
+  .game-board.board-medium,
+  .game-board.board-large {
+    height: 300px;
+  }
+
+  .snake-head,
+  .food {
+    width: 15px !important;
+    height: 15px !important;
+  }
+}
+
+/* ===== ANIMACIONES ===== */
+@keyframes foodPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+.food {
+  animation: foodPulse 1.5s ease-in-out infinite;
+}

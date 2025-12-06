@@ -1,0 +1,42 @@
+/* ===== VARIABLES GLOBALES DEL JUEGO ===== */
+/* Archivo centralizado para todas las variables CSS */
+/* Usar este archivo en lugar de definir variables en cada CSS */
+
+:root {
+  /* Colores principales */
+  --color-background: #0A0F0D;
+  --color-surface: #101010;
+  --color-text: #EAEAEA;
+  --color-text-secondary: #AAAAAA;
+  
+  /* Colores de la serpiente */
+  --color-primary: #39FF14;
+  --color-secondary: #00FF88;
+  --color-accent: #00F0FF;
+  --color-glow: rgba(57, 255, 20, 0.8);
+  
+  /* Colores de elementos del juego */
+  --color-food: #00bb9d;
+  --color-snake-1: #39FF14;
+  --color-snake-2: #00FF88;
+  --color-snake-3: #00F0FF;
+  
+  /* Colores con transparencia */
+  --color-primary-soft: rgba(57, 255, 20, 0.12);
+  --color-secondary-soft: rgba(0, 255, 136, 0.12);
+  
+  /* Variables de compatibilidad (legacy) */
+  --primary-green: var(--color-primary);
+  --secondary-blue: var(--color-secondary);
+  --accent-purple: var(--color-accent);
+  --dark-bg: var(--color-background);
+  --card-bg: var(--color-surface);
+  --text-primary: var(--color-text);
+  --text-secondary: var(--color-text-secondary);
+  --border-color: #333333;
+  --glow-green: var(--color-glow);
+  --danger-red: #ff0000;
+  
+  /* Variable para el tamaño de la cuadrícula */
+  --board-cells: 20;
+}
