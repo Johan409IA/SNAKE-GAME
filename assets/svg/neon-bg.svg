@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 1920 1080"
+     preserveAspectRatio="xMidYMid slice"
+     aria-hidden="true">
+
+  <title>Fondo Neon Retro para Snake Game</title>
+
+  <defs>
+    <!-- filtros de glow -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- gradiente radial para el fondo -->
+    <radialGradient id="bgRad" cx="50%" cy="35%" r="80%">
+      <stop offset="0%"  stop-color="#201131"/>
+      <stop offset="45%" stop-color="#191233"/>
+      <stop offset="100%" stop-color="#0b0b17"/>
+    </radialGradient>
+
+    <!-- patrón de rejilla fina -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0 L0 0 0 40" fill="none" stroke="#0fffa6" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+
+    <!-- patrón de scanlines -->
+    <pattern id="scan" width="2" height="4" patternUnits="userSpaceOnUse">
+      <rect width="2" height="2" y="0" x="0" fill="#000" opacity="0.06"/>
+    </pattern>
+
+    <!-- gradiente para las partículas -->
+    <radialGradient id="pgrad" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#9fffbf" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#00ff6a" stop-opacity="0.1"/>
+    </radialGradient>
+
+    <!-- estilo CSS interno (para animaciones dentro del SVG) -->
+    <style><![CDATA[
+      /* animaciones usando CSS para soporte dentro del svg */
+      .slow-move { animation: drift 28s linear infinite; }
+      .slow-move-rev { animation: drift 36s linear infinite reverse; }
+      .fast-move { animation: drift 18s linear infinite; }
+      @keyframes drift {
+        0%{ transform: translate(0px,0px); }
+        50%{ transform: translate(-220px,120px); }
+        100%{ transform: translate(0px,0px); }
+      }
+      .flicker { animation: pulse 2.6s ease-in-out infinite; }
+      @keyframes pulse {
+        0% { opacity:0.75; filter: blur(0px); transform: scale(1); }
+        50%{ opacity:1; filter: blur(2px); transform: scale(1.02); }
+        100%{ opacity:0.75; filter: blur(0px); transform: scale(1); }
+      }
+    ]]></style>
+
+  </defs>
+
+  <!-- fondo radial oscuro -->
+  <rect width="100%" height="100%" fill="url(#bgRad)"/>
+
+  <!-- gran glow central sutil -->
+  <g transform="translate(960, 360)">
+    <circle r="420" fill="#00ff6a" opacity="0.035" filter="url(#glow)"/>
+    <circle r="260" fill="#00ff6a" opacity="0.02" filter="url(#glow)"/>
+  </g>
+
+  <!-- rejilla en dos capas con movimiento distinto (parallax) -->
+  <g style="mix-blend-mode:screen; opacity:0.35">
+    <rect width="200%" height="200%" x="-25%" y="-25%" fill="url(#grid)" class="slow-move" style="transform-box: fill-box; transform-origin: center;"/>
+  </g>
+
+  <g style="mix-blend-mode:screen; opacity:0.18">
+    <rect width="200%" height="200%" x="-25%" y="-25%" fill="url(#grid)" class="slow-move-rev" style="transform-box: fill-box; transform-origin: center;"/>
+  </g>
+
+  <!-- líneas diagonales sutiles que se mueven -->
+  <g transform="translate(-300,-200)" opacity="0.06" style="filter:url(#glow); mix-blend-mode:screen;">
+    <path d="M0 0 L2200 0 L2200 6 L0 6 Z" fill="#00ff6a" transform="rotate(24 1100 10)" class="fast-move"/>
+    <path d="M0 0 L2200 0 L2200 6 L0 6 Z" fill="#00ff6a" transform="rotate(24 1100 40)" class="slow-move"/>
+  </g>
+
+  <!-- partículas/neon orbs flotantes -->
+  <g id="particles">
+    <!-- multiple circles with different speeds and delays -->
+    <circle cx="300" cy="180" r="6" fill="url(#pgrad)" opacity="0.95" class="flicker slow-move" style="transform-box:fill-box; transform-origin:300px 180px;">
+      <animate attributeName="cx" values="300;420;300" dur="22s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="180;240;180" dur="22s" repeatCount="indefinite"/>
+    </circle>
+
+    <circle cx="1600" cy="140" r="8" fill="#00ff6a" opacity="0.85" class="flicker slow-move-rev">
+      <animate attributeName="cx" values="1600;1480;1600" dur="26s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="140;220;140" dur="26s" repeatCount="indefinite"/>
+    </circle>
+
+    <circle cx="1200" cy="760" r="5" fill="#7fffb5" opacity="0.7" class="flicker slow-move">
+      <animate attributeName="cx" values="1200;1240;1200" dur="18s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="760;700;760" dur="18s" repeatCount="indefinite"/>
+    </circle>
+
+    <circle cx="800" cy="900" r="10" fill="#00ff6a" opacity="0.06">
+      <animate attributeName="cy" values="900;840;900" dur="40s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- sutil scanlines overlay (retro) -->
+  <rect width="100%" height="100%" fill="url(#scan)" opacity="0.07">
+    <animate attributeName="x" from="0" to="-8" dur="6s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- vignette oscuro -->
+  <radialGradient id="vign" cx="50%" cy="50%" r="70%">
+    <stop offset="60%" stop-color="#000" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#000" stop-opacity="0.45"/>
+  </radialGradient>
+  <rect width="100%" height="100%" fill="url(#vign)" />
+
+  <!-- fina grilla de puntos (a lo CRT) -->
+  <g opacity="0.03" fill="#00ff6a">
+    <!-- small dots created programmatically with a few circles for aesthetic -->
+    <circle cx="120" cy="60" r="1.2" />
+    <circle cx="260" cy="120" r="1.2" />
+    <circle cx="370" cy="340" r="1.2" />
+    <circle cx="900" cy="180" r="1.3" />
+    <circle cx="1400" cy="420" r="1.2" />
+    <circle cx="1700" cy="760" r="1.2" />
+    <circle cx="450" cy="820" r="1.2" />
+  </g>
+
+  <!-- indicador visual en la esquina superior para dar un "touch" retro -->
+  <g transform="translate(34,28)" opacity="0.9">
+    <rect x="0" y="0" width="130" height="34" rx="6" fill="#041017" stroke="#00ff6a" stroke-opacity="0.18"/>
+    <text x="12" y="22" fill="#00ff6a" font-size="12" font-family="Roboto Mono, monospace">NEON MODE</text>
+  </g>
+
+</svg>
