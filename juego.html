@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arcade Snake</title>
+    <link rel="stylesheet" href="./css/juego.css" />
+    <link rel="stylesheet" href="./css/tamaño.css" />
+    <link rel="stylesheet" href="./css/fondo.css" />
+    <link rel="stylesheet" href="./css/variables.css" />
+    <script src="./js/tema/tema-dato.js" defer></script>
+    <script src="./js/tema/tema.js" defer></script>
+    <script src="./sistema/utils.js" defer></script>
+    <script src="./js/tema/tema-cargar.js" defer></script>
+    <script defer>
+      // ThemeLoader aplicará el tema almacenado. Musica de fondo gestionada aqui.
+      window.addEventListener("DOMContentLoaded", () => {
+        if (
+          window.ThemeLoader &&
+          typeof window.ThemeLoader.applyStoredTheme === "function"
+        ) {
+          window.ThemeLoader.applyStoredTheme();
+        }
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // Update music name based on current theme
+        function updateMusicName() {
+          const themeId =
+            localStorage.getItem("arcade-snake-theme") ||
+            localStorage.getItem("snakeTheme") ||
+            "neonGreen";
+          if (typeof THEMES !== "undefined" && THEMES[themeId]) {
+            const theme = THEMES[themeId];
+            const musicNameEl = document.getElementById("nowPlayingTrack");
+            if (musicNameEl && theme.music) {
+              musicNameEl.textContent = `"${theme.music}"`;
+            }
+          }
+        }
+
+        // Music toggle button
+        const musicButton = document.getElementById("musicToggleButton");
+        if (musicButton) {
+          musicButton.addEventListener("click", function () {
+            window.AudioManager.toggleMusic();
+          });
+        }
+
+        // Sound effects toggle button
+        const sfxButton = document.getElementById("soundEffectsToggleButton");
+        if (sfxButton) {
+          sfxButton.addEventListener("click", function () {
+            window.AudioManager.toggleSoundEffects();
+          });
+        }
+
+        // Update music name on load
+        updateMusicName();
+
+        // Update music name when theme changes
+        window.addEventListener("snakeThemeApplied", updateMusicName);
+        window.addEventListener("storage", function (e) {
+          if (e.key === "arcade-snake-theme" || e.key === "snakeTheme") {
+            updateMusicName();
+          }
+        });
+      });
+    </script>
+    <script src="./js/interfaz/config.js" defer></script>
+    <script src="./sistema/audio.js" defer></script>
+    <script src="./js/renderer.js" defer></script>
+    <script type="module" src="./clases/game.js"></script>
+  </head>
+  <body>
+    <div class="green-3d-background">
+      <div class="particle-layer layer-1"></div>
+      <div class="particle-layer layer-2"></div>
+      <div class="particle-layer layer-3"></div>
+    </div>
+    <div class="container">
+      <header>
+        <a class="back-button" id="backButton" href="menu.html">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+        </a>
+
+        <h1>ARCADE SNAKE</h1>
+
+        <div class="mode-info">
+          <span>MODO CLÁSICO VERDE</span>
+          <span>NIVEL 1 | MODO CLASICO</span>
+        </div>
+      </header>
+
+      <div class="mode-banner">
+        Modo: Modo Clasico - Presione SPACE o click en START para iniciar
+      </div>
+
+      <div class="main-layout">
+        <aside class="left-panel">
+          <section class="panel arcade-status">
+            <h2>ESTADO</h2>
+            <div class="status-row">
+              <label>PUNTUACION:</label>
+              <span class="value">000000</span>
+            </div>
+            <div class="status-row">
+              <label>NIVEL:</label>
+              <span class="value">01</span>
+            </div>
+            <div class="status-row">
+              <label>MEJOR:</label>
+              <span class="value">000000</span>
+            </div>
+            <div class="status-row">
+              <label>TIEMPO:</label>
+              <span class="value" data-timer>00:00</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill"></div>
+            </div>
+            <div class="next-level">SIGUIENTE NIVEL<br />100 PTS. RESTANTE</div>
+
+            <div class="legend-inline">
+              <strong>LEYENDA:</strong>
+              <div class="legend-item">
+                <div class="color-box green"></div>
+                <span>CUERPO</span>
+              </div>
+              <div class="legend-item">
+                <div class="color-box red"></div>
+                <span>COMIDA</span>
+              </div>
+              <div class="legend-item">
+                <div class="color-box cyan"></div>
+                <span>CABEZA</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel game-controls">
+            <h2>🎮 CONTROLES</h2>
+            <button class="btn-start">▶ INICIAR JUEGO</button>
+            <div class="controls-grid">
+              <div class="control-box">
+                <h3>MOVER</h3>
+                <p>↑↓←→ FLECHA</p>
+                <p>W A S D</p>
+              </div>
+              <div class="control-box">
+                <h3>ACCION</h3>
+                <p>ESPACIO</p>
+                <p>INICIO/PAUSA</p>
+              </div>
+            </div>
+            <div class="more-info">JUEGOS RETRO DE ALTA ENERGÍA</div>
+          </section>
+        </aside>
+
+        <div class="game-board-container">
+          <div class="game-board">
+            <div class="snake-game-area">
+              <div class="snake-head"></div>
+              <div class="food"></div>
+              <div class="grid-lines"></div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="right-panel">
+          <section class="panel audio-system">
+            <h2>🔊 AUDIO</h2>
+            <button class="btn-audio" id="musicToggleButton">
+              🎵 MUSICA OFF
+            </button>
+            <button class="btn-audio" id="soundEffectsToggleButton">
+              🔊 EFECTOS DE SONIDO
+            </button>
+            <div class="now-playing">
+              <h3>Reproduciendo ahora</h3>
+              <p id="nowPlayingTrack">"SYNTHWAVE ARCADE"</p>
+              <div class="waveform">
+                <span class="waveform-bar"></span>
+                <span class="waveform-bar"></span>
+                <span class="waveform-bar"></span>
+                <span class="waveform-bar"></span>
+                <span class="waveform-bar"></span>
+                <span class="waveform-bar"></span>
+                <span class="waveform-bar"></span>
+                <span class="waveform-bar"></span>
+                <span class="waveform-bar"></span>
+                <span class="waveform-bar"></span>
+              </div>
+            </div>
+          </section>
+        </aside>
+      </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div class="game-over-modal" id="gameOverModal">
+      <div class="modal-content">
+        <h2>FIN DE LA PARTIDA</h2>
+        <div class="modal-score">
+          <p>Puntuación: <span id="modalScore">000000</span></p>
+          <p>Nivel alcanzado: <span id="modalLevel">01</span></p>
+        </div>
+        <button class="modal-button" id="modalCloseButton">CONTINUAR</button>
+      </div>
+    </div>
+    <script type="module" src="./clases/temporizador.js"></script>
+    <script type="module" src="./clases/serpiente.js"></script>
+    <script type="module" src="./clases/comida.js"></script>
+    <script type="module" src="./clases/obstaculos.js"></script>
+    <script type="module" src="index.js"></script>
+  </body>
+</html>

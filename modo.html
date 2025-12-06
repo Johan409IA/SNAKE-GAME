@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snake Game - Modo de Juego</title>
+    <link rel="stylesheet" href="./css/variables.css" />
+    <link rel="stylesheet" href="./css/modo.css" />
+    <script src="./js/tema/tema-dato.js" defer></script>
+    <script src="./js/tema/tema.js" defer></script>
+    <script src="./js/tema/tema-cargar.js" defer></script>
+    <script src="./sistema/audio.js" defer></script>
+    <script src="./sistema/utils.js" defer></script>
+  </head>
+  <body>
+    <div class="page-content"></div>
+    <div class="game-container">
+      <!-- Efectos de fondo -->
+      <div class="background-animation"></div>
+      <div class="grid-background"></div>
+
+      <div class="mode-selector">
+        <!-- Header -->
+        <header class="mode-header">
+          <div class="header-content">
+            <a id="back-button" class="back-button" href="menu.html">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M15 18L9 12L15 6"
+                  stroke="#fff"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </a>
+            <h1 class="mode-title">MODO DE JUEGO</h1>
+            <a href="juego.html" id="play-button" class="play-button">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                class="play-icon"
+              >
+                <path d="M8 5v14l11-7z" fill="#fff" />
+              </svg>
+              JUGAR
+            </a>
+          </div>
+        </header>
+
+        <!-- Game Modes Grid -->
+        <main class="game-modes">
+          <div class="modes-grid">
+            <div class="mode-card selected" data-mode="classic">
+              <div class="mode-icon">
+                <img src="assets/svg/modo.svg" alt="" class="icon" />
+              </div>
+              <div class="mode-content">
+                <div class="mode-header-info">
+                  <h3 class="mode-name">Clásico</h3>
+                  <div class="selection-indicator"></div>
+                </div>
+                <p class="mode-description">
+                  El modo tradicional de Snake. Come y crece sin límites.
+                </p>
+                <div class="mode-rules">
+                  <p class="rules-title">Reglas especiales:</p>
+                  <ul class="rules-list">
+                    <li class="rule-item">La serpiente crece al comer</li>
+                    <li class="rule-item">Sin límite de tiempo</li>
+                    <li class="rule-item">Velocidad constante</li>
+                    <li class="rule-item">El juego termina al chocar</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="mode-card" data-mode="timeAttack">
+              <div class="mode-icon">
+                <img
+                  src="assets/svg/tiempo.svg"
+                  alt="icono tiempo"
+                  class="icon"
+                />
+              </div>
+              <div class="mode-content">
+                <div class="mode-header-info">
+                  <h3 class="mode-name">Contra el Tiempo</h3>
+                  <div class="selection-indicator"></div>
+                </div>
+                <p class="mode-description">
+                  Come toda la comida antes de que se acabe el tiempo.
+                </p>
+                <div class="time-limit">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      stroke="#ff00ff"
+                      stroke-width="2"
+                    />
+                  </svg>
+                  <span>Tiempo límite: 120s</span>
+                </div>
+                <div class="mode-rules">
+                  <p class="rules-title">Reglas especiales:</p>
+                  <ul class="rules-list">
+                    <li class="rule-item">Límite de 120 segundos</li>
+                    <li class="rule-item">La serpiente crece al comer</li>
+                    <li class="rule-item">Velocidad aumenta con el tiempo</li>
+                    <li class="rule-item">Obtén la mayor puntuación</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="mode-card" data-mode="endless">
+              <div class="mode-icon">
+                <img
+                  src="assets/svg/infinito.svg"
+                  alt="icono de infinito"
+                  class="icon"
+                />
+              </div>
+              <div class="mode-content">
+                <div class="mode-header-info">
+                  <h3 class="mode-name">Modo Sin Fin</h3>
+                  <div class="selection-indicator"></div>
+                </div>
+                <p class="mode-description">
+                  Juego relajado sin colisiones de paredes. Perfecto para
+                  practicar.
+                </p>
+                <div class="mode-rules">
+                  <p class="rules-title">Reglas especiales:</p>
+                  <ul class="rules-list">
+                    <li class="rule-item">Ideal para practicar</li>
+                    <li class="rule-item">Sin límite de tiempo</li>
+                    <li class="rule-item">La serpiente no crece</li>
+                    <li class="rule-item">El juego nunca termina</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="mode-card" data-mode="obstacles">
+              <div class="mode-icon">
+                <img
+                  src="assets/svg/advertencia.svg"
+                  alt="icon de advertencia"
+                  class="icon"
+                />
+              </div>
+              <div class="mode-content">
+                <div class="mode-header-info">
+                  <h3 class="mode-name">Modo Obstáculos</h3>
+                  <div class="selection-indicator"></div>
+                </div>
+                <p class="mode-description">
+                  Evita obstáculos dinámicos mientras juegas Snake clásico.
+                </p>
+                <div class="mode-rules">
+                  <p class="rules-title">Reglas especiales:</p>
+                  <ul class="rules-list">
+                    <li class="rule-item">Evita los obstáculos</li>
+                    <li class="rule-item">La serpiente crece al comer</li>
+                    <li class="rule-item">Mapa con elementos fijos</li>
+                    <li class="rule-item">Dificultad extra añadida</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Current Selection Display -->
+          <div class="selection-display">
+            <p class="selection-text">
+              Modo seleccionado:
+              <span id="selected-mode" class="selected-mode-name">Clásico</span>
+            </p>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script src="./js/interfaz/modo.js"></script>
+  </body>
+</html>

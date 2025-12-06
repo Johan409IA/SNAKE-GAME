@@ -1,0 +1,91 @@
+<!-- PANTALLA DE MENU -->
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arcade Snake - Retro Edition</title>
+    <link rel="stylesheet" href="./css/variables.css" />
+    <link rel="stylesheet" href="./css/menu.css" />
+    <script src="./js/tema/tema-dato.js" defer></script>
+    <script src="./sistema/utils.js" defer></script>
+    <script src="./js/tema/tema.js" defer></script>
+    <script src="./js/tema/tema-cargar.js" defer></script>
+    <script src="./sistema/audio.js" defer></script>
+    <script defer>
+      window.addEventListener("DOMContentLoaded", () => {
+        // Apply stored theme if ThemeLoader is available
+        window.ThemeLoader?.applyStoredTheme();
+
+        // Setup menu music button
+        const menuMusicButton = document.querySelector(".btn-music");
+        menuMusicButton?.addEventListener("click", (e) => {
+          e.preventDefault();
+          window.AudioManager?.toggleMusic();
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <div class="container fade-in">
+      <div class="menu-box">
+        <header>
+          <div class="title">
+            <h1>ARCADE<br />SNAKE</h1>
+          </div>
+
+          <div class="subtitle">
+            <span class="line"></span>
+            EDICION RETRO
+            <span class="line"></span>
+          </div>
+          <p class="description" data-theme-description>
+            MODO CLÁSICO VERDE | JUEGO DE ALTA ENERGÍA
+          </p>
+        </header>
+        <div class="menu-buttons">
+          <a class="btn btn-play" href="juego.html">
+            <span class="icon">▶</span> JUGAR
+          </a>
+
+          <a href="temas.html" class="btn">
+            <img src="assets/svg/theme.svg" alt="icono de temas" class="icon" />
+            CAMBIAR TEMA
+          </a>
+
+          <a class="btn" href="modo.html">
+            <img
+              src="assets/svg/modo.svg"
+              alt="icono de modo de juego"
+              class="icon"
+            />
+            MODO DE JUEGO
+          </a>
+          <a class="btn" href="ajustes.html">
+            <img
+              src="assets/svg/config.svg"
+              alt="icono de configuracion"
+              class="icon"
+            />
+            AJUSTES
+          </a>
+
+          <a class="btn btn-music">
+            <img
+              src="assets/svg/musica.svg"
+              alt="icono de musica"
+              class="icon"
+            />
+            MUSICA
+          </a>
+        </div>
+
+        <div class="footer">
+          <p>Tema actual: <span data-theme-name>Modo Clásico Verde</span></p>
+          <p class="easter-egg" data-theme-music>🎵 Cyber Arcade Beat 🎵</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

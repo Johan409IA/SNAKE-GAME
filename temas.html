@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Selector de Tema - Arcade Snake</title>
+    <link rel="stylesheet" href="./css/temas.css" />
+    <link rel="stylesheet" href="./css/variables.css" />
+    <script src="./js/tema/tema-dato.js" defer></script>
+    <script src="./js/tema/tema.js" defer></script>
+    <script src="./sistema/audio.js" defer></script>
+    <script src="./js/tema/tema-cargar.js"></script>
+    <script src="./sistema/utils.js"></script>
+  </head>
+  <body>
+    <div class="animated-background">
+      <div class="stars-container" id="starsContainer"></div>
+      <div class="corner-accent corner-tl"></div>
+      <div class="corner-accent corner-tr"></div>
+      <div class="corner-accent corner-bl"></div>
+      <div class="corner-accent corner-br"></div>
+    </div>
+
+    <div class="container">
+      <header class="header">
+        <a class="back-button" id="backButton" href="menu.html">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+        </a>
+        <h1 class="title">SELECCIONAR TEMA</h1>
+      </header>
+
+      <div class="themes-grid" id="themesGrid"></div>
+
+      <div class="apply-button-container">
+        <button class="apply-button" id="applyButton">APLICAR TEMA</button>
+      </div>
+    </div>
+  </body>
+</html>

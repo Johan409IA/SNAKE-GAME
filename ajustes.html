@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snake Game - Configuración</title>
+    <link rel="stylesheet" href="./css/variables.css" />
+    <link rel="stylesheet" href="./css/ajuste.css" />
+    <script src="./sistema/utils.js"></script>
+    <script src="./js/tema/tema-cargar.js"></script>
+    <script src="./js/tema/tema-dato.js" defer></script>
+    <script src="./js/tema/tema.js" defer></script>
+    <script src="./js/interfaz/ajustes.js" defer></script>
+  </head>
+  <body>
+    <div class="game-container">
+      <!-- Background Effects -->
+      <div class="background-animation"></div>
+      <div class="grid-background"></div>
+
+      <div class="settings-container">
+        <!-- Header -->
+        <header class="settings-header">
+          <div class="header-content">
+            <a href="menu.html" id="back-button" class="back-button">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M15 18L9 12L15 6"
+                  stroke="#fff"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </a>
+            <h1 class="settings-title">AJUSTES</h1>
+            <button id="save-button" class="save-button">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                class="save-icon"
+              >
+                <path
+                  d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"
+                  stroke="#fff"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <polyline
+                  points="17 21 17 13 7 13 7 21"
+                  stroke="#fff"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <polyline
+                  points="7 3 7 8 15 8"
+                  stroke="#fff"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              GUARDAR
+            </button>
+          </div>
+        </header>
+
+        <!-- Settings Content -->
+        <main class="settings-content">
+          <!-- Board Size Section -->
+          <section class="settings-section">
+            <h2 class="section-title">TAMAÑO DEL TABLERO</h2>
+            <div class="setting-item">
+              <div class="setting-description">
+                <p class="setting-name">Tamaño del tablero</p>
+                <p class="setting-info">
+                  Ajusta las dimensiones del área de juego
+                </p>
+              </div>
+              <div class="setting-control">
+                <div class="board-size-options">
+                  <label class="radio-option">
+                    <input
+                      type="radio"
+                      name="board-size"
+                      value="small"
+                      checked
+                    />
+                    <span class="radio-custom"></span>
+                    <span class="radio-label">Pequeño (15x15)</span>
+                  </label>
+                  <label class="radio-option">
+                    <input type="radio" name="board-size" value="medium" />
+                    <span class="radio-custom"></span>
+                    <span class="radio-label">Mediano (20x20)</span>
+                  </label>
+                  <label class="radio-option">
+                    <input type="radio" name="board-size" value="large" />
+                    <span class="radio-custom"></span>
+                    <span class="radio-label">Grande (25x25)</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Grid Display Section -->
+          <section class="settings-section">
+            <h2 class="section-title">VISUALIZACIÓN</h2>
+            <div class="setting-item">
+              <div class="setting-description">
+                <p class="setting-name">Mostrar cuadrícula</p>
+                <p class="setting-info">
+                  Muestra u oculta las líneas de la cuadrícula
+                </p>
+              </div>
+              <div class="setting-control">
+                <label class="toggle-switch">
+                  <input type="checkbox" checked />
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+          </section>
+          <!-- Food Shape Section -->
+          <section class="settings-section">
+            <h2 class="section-title">APARIENCIA</h2>
+            <div class="setting-item">
+              <div class="setting-description">
+                <p class="setting-name">Forma de la comida</p>
+                <p class="setting-info">
+                  Personaliza la apariencia de los alimentos
+                </p>
+              </div>
+              <div class="setting-control">
+                <div class="food-shape-options">
+                  <label class="shape-option">
+                    <input
+                      type="radio"
+                      name="food-shape"
+                      value="square"
+                      checked
+                    />
+                    <img
+                      src="assets/svg/manzana.svg"
+                      alt="comida manzana"
+                      class="shape-preview square"
+                    />
+                    <span class="shape-label">Manzana</span>
+                  </label>
+                  <label class="shape-option">
+                    <input type="radio" name="food-shape" value="circle" />
+                    <img
+                      src="assets/svg/uva.svg"
+                      alt="comida uva"
+                      class="shape-preview square"
+                    />
+                    <span class="shape-label">Uva</span>
+                  </label>
+                  <label class="shape-option">
+                    <input type="radio" name="food-shape" value="triangle" />
+                    <img
+                      src="assets/svg/platano.svg"
+                      alt="comida Platano"
+                      class="shape-preview square"
+                    />
+                    <span class="shape-label">Platano</span>
+                  </label>
+                  <label class="shape-option">
+                    <input type="radio" name="food-shape" value="star" />
+                    <img
+                      src="assets/svg/sandia.svg"
+                      alt="comida Sandia"
+                      class="shape-preview square"
+                    />
+                    <span class="shape-label">Sandia</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Reset Section -->
+          <section class="settings-section">
+            <h2 class="section-title">RESTABLECER</h2>
+            <div class="setting-item">
+              <div class="setting-description">
+                <p class="setting-name">Valores predeterminados</p>
+                <p class="setting-info">
+                  Restablece todas las configuraciones a sus valores iniciales
+                </p>
+              </div>
+              <div class="setting-control">
+                <button class="reset-button">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M1 4v6h6"
+                      stroke="#ff0000"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M3.51 15a9 9 0 102.13-9.36L1 10"
+                      stroke="#ff0000"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                  RESTABLECER
+                </button>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>
